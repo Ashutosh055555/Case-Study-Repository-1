@@ -13,7 +13,7 @@ COLORS = {
 CUSTOM_CSS = f"""
     <style>
     .main-header {{
-        font-size: 5rem;
+        font-size: 20rem;
         color: {COLORS['primary']};
         text-align: center;
         padding: 1.5rem;
