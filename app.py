@@ -157,8 +157,17 @@ if selected_industries and selected_skus:
 # Show raw data option with custom styling
 with st.expander("View All Case Studies"):
     display_df = df.copy()
-    display_df['Link'] = df.apply(lambda x: make_clickable_link(x['Link_URL'], x['Link_Text']), axis=1)
+
+    # Fixing potential missing values
+    display_df[SKU_COLUMNS] = display_df[SKU_COLUMNS].astype(str).fillna("")
+    
+    # Ensure Link_URL is valid
+    display_df['Link'] = display_df.apply(lambda x: make_clickable_link(x['Link_URL'], x['Link_Text']) if pd.notna(x['Link_URL']) else "", axis=1)
+    
+    # Ensure the correct column names are used
     display_columns = ['Client / Use Case', 'Category', 'Industry 1', 'Link', 'Status'] + SKU_COLUMNS
+    
+    # Display the dataframe
     st.write(display_df[display_columns].to_html(escape=False, classes='dataframe'), unsafe_allow_html=True)
 
 # Footer
