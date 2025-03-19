@@ -67,14 +67,14 @@ SHEET_URL = "https://docs.google.com/spreadsheets/d/13buOEdfm42uRig4gOFBZ8cXKHsO
 # Relevant columns for data processing
 RELEVANT_COLUMNS = [
     'Client / Use Case', 'Category', 'Industry 1', 'Link', 'Status',
-    'SKU', 'SKU Pitched 1', 'SKU Pitched 2', 'SKU Pitched 3'
+    'SKU', 'SKU Pitched 1', 'SKU Pitched 2', 'SKU Pitched 3', 'SKU Pitched 4', 'SKU Pitched 5', 'SKU Pitched 6', 'SKU Pitched 7', 'SKU Pitched 8', 'SKU Pitched 9', 'SKU Pitched 10', 'SKU Pitched 11', 'SKU Pitched 12', 'SKU Pitched 13', 'SKU Pitched 14', 'SKU Pitched 15'
 ]
 
 # SKU columns for filtering
-SKU_COLUMNS = ['SKU', 'SKU Pitched 1', 'SKU Pitched 2', 'SKU Pitched 3']
+SKU_COLUMNS = ['SKU', 'SKU Pitched 1', 'SKU Pitched 2', 'SKU Pitched 3', 'SKU Pitched 4', 'SKU Pitched 5', 'SKU Pitched 6', 'SKU Pitched 7', 'SKU Pitched 8', 'SKU Pitched 9', 'SKU Pitched 10', 'SKU Pitched 11', 'SKU Pitched 12', 'SKU Pitched 13', 'SKU Pitched 14', 'SKU Pitched 15']
 
 # Search columns
 SEARCH_COLUMNS = [
     'Client / Use Case', 'Category', 'Industry 1', 'Link_Text', 'Status',
-    'SKU', 'SKU Pitched 1', 'SKU Pitched 2', 'SKU Pitched 3'
+    'SKU', 'SKU Pitched 1', 'SKU Pitched 2', 'SKU Pitched 3', 'SKU Pitched 4', 'SKU Pitched 5', 'SKU Pitched 6', 'SKU Pitched 7', 'SKU Pitched 8', 'SKU Pitched 9', 'SKU Pitched 10', 'SKU Pitched 11', 'SKU Pitched 12', 'SKU Pitched 13', 'SKU Pitched 14', 'SKU Pitched 15'
 ]
