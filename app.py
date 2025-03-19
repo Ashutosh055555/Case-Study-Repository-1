@@ -55,7 +55,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.markdown('<p class="subheader">Industry Filter</p>', unsafe_allow_html=True)
-    industries = get_unique_values(df, 'Industry 1')
+    industries = get_unique_values(df, 'Industry')
     selected_industries = st.multiselect(
         "Select Industries",
         options=industries,
@@ -68,7 +68,7 @@ with col1:
         st.markdown(get_metric_card_html(link_count), unsafe_allow_html=True)
         
         st.markdown("### Breakdown by Industry")
-        industry_counts = filtered_df_industry.groupby('Industry 1').agg({
+        industry_counts = filtered_df_industry.groupby('Industry').agg({
             'Link': lambda x: count_links(x)
         }).reset_index()
         industry_counts.columns = ['Industry', 'Link Count']
@@ -76,7 +76,7 @@ with col1:
 
         st.markdown("### Case Studies by Industry")
         for industry in selected_industries:
-            industry_links = filtered_df_industry[filtered_df_industry['Industry 1'] == industry]
+            industry_links = filtered_df_industry[filtered_df_industry['Industry'] == industry]
             if not industry_links.empty:
                 st.markdown(f"#### {industry}")
                 for _, row in industry_links.iterrows():
@@ -134,7 +134,7 @@ with col2:
 if selected_industries and selected_skus:
     st.markdown('<p class="subheader">Combined Filter Results</p>', unsafe_allow_html=True)
     # Using OR logic: either industry matches OR SKU matches
-    industry_mask = df['Industry 1'].isin(selected_industries)
+    industry_mask = df['Industry'].isin(selected_industries)
     sku_mask = df[SKU_COLUMNS].isin(selected_skus).any(axis=1)
     # Using | (OR) instead of & (AND)
     combined_filter = df[industry_mask | sku_mask]
@@ -165,7 +165,7 @@ with st.expander("View All Case Studies"):
     display_df['Link'] = display_df.apply(lambda x: make_clickable_link(x['Link_URL'], x['Link_Text']) if pd.notna(x['Link_URL']) else "", axis=1)
     
     # Ensure the correct column names are used
-    display_columns = ['Client / Use Case', 'Category', 'Industry 1', 'Link', 'Status'] + SKU_COLUMNS
+    display_columns = ['Client / Use Case', 'Category', 'Industry', 'Link'] + SKU_COLUMNS
     
     # Display the dataframe
     st.write(display_df[display_columns].to_html(escape=False, classes='dataframe'), unsafe_allow_html=True)
