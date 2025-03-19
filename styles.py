@@ -13,14 +13,14 @@ COLORS = {
 CUSTOM_CSS = f"""
     <style>
     .main-header {{
-        font-size: 5rem;
+        font-size: 2rem;
         color: {COLORS['primary']};
         text-align: center;
-        padding: 1.5rem;
+        padding: 1rem;
         font-weight: bold;
         background: linear-gradient(135deg, {COLORS['background']}, {COLORS['white']});
         border-radius: 15px;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         border-bottom: 4px solid {COLORS['secondary']};
     }}
