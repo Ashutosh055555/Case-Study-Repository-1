@@ -74,8 +74,7 @@ def format_result_text(row, sku_columns):
     sku_text = f" | SKUs: {', '.join(non_empty_skus)}" if non_empty_skus else ""
     client = f"**{row['Client / Use Case']}**" if row['Client / Use Case'] != '' else ""
     category = f"Category: {row['Category']}" if row['Category'] != '' else ""
-    industry = f"Industry: {row['Industry 1']}" if row['Industry 1'] != '' else ""
-    status = f"Status: {row['Status']}" if row['Status'] != '' else ""
+    industry = f"Industry: {row['Industry']}" if row['Industry'] != '' else ""
     
     parts = [p for p in [client, category, industry, status] if p != ""]
     base_text = " | ".join(parts)
@@ -88,7 +87,7 @@ def format_result_text(row, sku_columns):
 def get_filtered_data(df, filter_type, filter_values, sku_columns):
     """Get filtered dataframe based on filter type and values"""
     if filter_type == 'industry':
-        return df[df['Industry 1'].isin(filter_values)]
+        return df[df['Industry'].isin(filter_values)]
     elif filter_type == 'sku':
         return df[df[sku_columns].isin(filter_values).any(axis=1)]
     return df
