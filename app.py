@@ -14,7 +14,7 @@ from utils import (
 
 # Page configuration
 st.set_page_config(
-    page_title="EMB Global- Case Study Repo",
+    page_title="EMB GLOBAL- Case Study Repo",
     page_icon="📚",
     layout="wide"
 )
@@ -23,7 +23,7 @@ st.set_page_config(
 st.markdown(CUSTOM_CSS, unsafe_allow_html=True)
 
 # Main title
-st.markdown('<p class="main-header">EMB Global - Case Study Repository</p>', unsafe_allow_html=True)
+st.markdown('<p class="main-header">EMB GLOBAL - Case Study Repository</p>', unsafe_allow_html=True)
 
 # Welcome message
 st.markdown(WELCOME_HTML, unsafe_allow_html=True)
