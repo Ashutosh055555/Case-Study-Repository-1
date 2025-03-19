@@ -76,7 +76,7 @@ def format_result_text(row, sku_columns):
     category = f"Category: {row['Category']}" if row['Category'] != '' else ""
     industry = f"Industry: {row['Industry']}" if row['Industry'] != '' else ""
     
-    parts = [p for p in [client, category, industry, status] if p != ""]
+    parts = [p for p in [client, category, industry] if p != ""]
     base_text = " | ".join(parts)
     
     if row['Link_URL']:
