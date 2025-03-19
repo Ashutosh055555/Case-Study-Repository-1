@@ -86,6 +86,8 @@ with col1:
 
 with col2:
     st.markdown('<p class="subheader">SKU Filter</p>', unsafe_allow_html=True)
+    
+    # Multi-select filter for SKU selection
     selected_skus = st.multiselect(
         "Select SKUs",
         options=sorted(PREDEFINED_SKUS),
@@ -93,25 +95,36 @@ with col2:
     )
     
     if selected_skus:
+        # Ensure all SKU columns are considered in filtering
         filtered_df_sku = get_filtered_data(df, 'sku', selected_skus, SKU_COLUMNS)
         link_count = count_links(filtered_df_sku['Link'])
         st.markdown(get_metric_card_html(link_count), unsafe_allow_html=True)
         
+        # Breakdown by SKU
         st.markdown("### Breakdown by SKU")
         sku_counts = pd.DataFrame()
+        
         for sku in selected_skus:
-            sku_mask = df[SKU_COLUMNS].isin([sku]).any(axis=1)
-            count = count_links(df[sku_mask]['Link'])
-            sku_counts = pd.concat([sku_counts, pd.DataFrame({'SKU': [sku], 'Link Count': [count]})])
+            # Fix: Apply correct filtering logic
+            sku_mask = df[SKU_COLUMNS].apply(lambda row: row.astype(str).str.contains(sku, case=False, na=False)).any(axis=1)
+            count = count_links(df.loc[sku_mask, 'Link'])
+            
+            sku_counts = pd.concat([sku_counts, pd.DataFrame({'SKU': [sku], 'Link Count': [count]})], ignore_index=True)
+        
         st.dataframe(sku_counts, use_container_width=True)
 
+        # Case Studies by SKU
         st.markdown("### Case Studies by SKU")
         for sku in selected_skus:
-            sku_links = filtered_df_sku[filtered_df_sku[SKU_COLUMNS].isin([sku]).any(axis=1)]
+            # Fix: Apply the same filtering logic as above
+            sku_links = filtered_df_sku[
+                filtered_df_sku[SKU_COLUMNS].apply(lambda row: row.astype(str).str.contains(sku, case=False, na=False)).any(axis=1)
+            ]
+            
             if not sku_links.empty:
                 st.markdown(f"#### {sku}")
                 for _, row in sku_links.iterrows():
-                    if row['Link_URL']:
+                    if row.get('Link_URL'):  # Fix: Use `.get()` to avoid key errors
                         result_text = format_result_text(row, SKU_COLUMNS)
                         st.markdown(get_result_item_html(result_text), unsafe_allow_html=True)
 
